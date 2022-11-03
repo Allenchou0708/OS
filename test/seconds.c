@@ -39,24 +39,24 @@ static struct file_operations proc_ops = {
 // 當模組被載入會觸發這個函式 返回0代表成功 其他值代表失敗
 static int proc_init(void)
 {
-    
+
     //////////////////////
     init_jiffies=jiffies;
     /////////////////////
     //用變數記住載入模組時的jiffies
-    
-    
+
+
         // 創出/proc/seconds這個項目
         proc_create(PROC_NAME, 0, NULL, &proc_ops);
 
         printk(KERN_INFO "/proc/%s created\n", PROC_NAME);
 
-	return 0;
+        return 0;
 }
 
 // 當模組被移除會觸發這個函式 無返回值
 static void proc_exit(void) {
-    
+
         // 移除/proc/seconds項目
         remove_proc_entry(PROC_NAME, NULL);
 
@@ -69,7 +69,7 @@ static ssize_t proc_read(struct file *file, char __user *usr_buf, size_t count, 
 {
         int rv = 0; // 顯示訊息的長度
         char buffer[BUFFER_SIZE];
-    
+
         // 每次讀取 /proc/seconds 檔案時，會重複呼叫proc_read()函式，所以下面的程式碼是為了
         // 限制在 "cat /proc/seconds" 時，只會列出一次資訊，否則只要回傳的不是0就會一直循環輸出下去
         static int completed = 0;
@@ -88,7 +88,7 @@ static ssize_t proc_read(struct file *file, char __user *usr_buf, size_t count, 
                      /////////////////////
                      );
 
-    
+
         // 將buffer的內容複製到用戶空間usr_buf
         raw_copy_to_user(usr_buf, buffer, rv);
 

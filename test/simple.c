@@ -8,7 +8,7 @@
 static int simple_init(void)
 {
     printk(KERN_INFO "Loading Module\n");
-    
+
     //////////////////////
     ////<在此加入程式碼>////
     /////////////////////
@@ -19,7 +19,7 @@ static int simple_init(void)
 
 // 當模組被移除會觸發這個函式 無返回值
 static void simple_exit(void) {
-    
+
     //////////////////////
     ////<在此加入程式碼>////
     /////////////////////>
@@ -34,4 +34,3 @@ module_exit( simple_exit );
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Simple Module");
 MODULE_AUTHOR("NOBODY");
-
